@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Calculator</title>
+    <style>
+        body {
+            background-color: #ff69b4;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 3em;
+            font-style: italic;
+            margin-top: 20px;
+        }
+        form {
+            margin: 20px auto;
+            width: 50%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        input[type="text"], input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        input[type="submit"] {
+            background-color: #ff1493;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #c71585;
+        }
+        @media screen and (max-width:600px)
+        {
+            form
+            {
+                width:200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>❤️ Love Calculator ❤️</h1>
+    <form onsubmit="return calculateLove();">
+        <label for="yourName">Enter your name:</label><br>
+        <input type="text" id="yourName" placeholder="Your name"><br>
+        <label for="crushName">Enter your crush's name:</label><br>
+        <input type="text" id="crushName" placeholder="Crush's name"><br>
+        <label for="yourAge">Enter your age:</label><br>
+        <input type="number" id="yourAge" placeholder="Your age"><br>
+        <label for="crushAge">Enter your crush's age:</label><br>
+        <input type="number" id="crushAge" placeholder="Crush's age"><br>
+        <input type="submit" value="Calculate Love">
+    </form>
+    <script>
+        function calculateLove() {
+            // Get the values entered by the user
+            var yourName = document.getElementById("yourName").value.trim();
+            var crushName = document.getElementById("crushName").value.trim();
+            var yourAge = parseInt(document.getElementById("yourAge").value);
+            var crushAge = parseInt(document.getElementById("crushAge").value);
+
+            // Validation
+            if (yourName === "" || crushName === "") {
+                alert("Please enter both names.");
+                return false;
+            }
+            if (isNaN(yourAge) || isNaN(crushAge)) {
+                alert("Please enter valid ages.");
+                return false;
+            }
+
+            // Perform addition
+            var sum = yourAge + crushAge;
+            var result = "";
+
+            // Determine result based on the sum
+            if (sum === 32) {
+                result = "Jaldi propose kar do, nahi toh haath se nikal jayengi! 💘";
+            } else if (sum >= 33 && sum <= 35) {
+                result = "You are made for each other! 🥰";
+            } else if (sum >= 36 && sum <= 38) {
+                result = "Thoda sambhal ke, yeh risk wala zone hai! 😅";
+            } else if (sum >= 39 && sum <= 49) {
+                result = "Your love is amazing! 💖";
+            } else if (sum >= 50) {
+                result = "You have good chances of a relationship! 😍";
+            } else {
+                result = "Bhai, wo teri nahi ho sakti! 😭";
+            }
+
+            // Display the result
+            alert("Result: " + result);
+            return false; // Prevent form submission
+        }
+    </script>
+</body>
+</html>
