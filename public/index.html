@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💘 Love Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.8rem;
+      color: #ff3366;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 2px solid #ffd3dc;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ff3366;
+      box-shadow: 0 0 5px #ff3366aa;
+    }
+
+    button {
+      background: #ff3366;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #e6004c;
+    }
+
+    .result-box {
+      margin-top: 20px;
+      background: #fff0f5;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 51, 102, 0.4);
+      color: #ff3366;
+      font-size: 1.1rem;
+      font-weight: bold;
+      animation: fadeIn 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>💘 Love Calculator</h1>
+    <form id="loveForm">
+      <input type="text" id="yourName" placeholder="Your name" required />
+      <input type="text" id="crushName" placeholder="Crush's name" required />
+      <input type="number" id="yourAge" placeholder="Your age" required />
+      <input type="number" id="crushAge" placeholder="Crush's age" required />
+      <button type="submit">💌 Calculate</button>
+    </form>
+    <div id="resultBox" class="result-box" style="display: none;"></div>
+  </div>
+
+  <script>
+    document.getElementById('loveForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const yourName = document.getElementById("yourName").value;
+      const crushName = document.getElementById("crushName").value;
+      const yourAge = parseInt(document.getElementById("yourAge").value);
+      const crushAge = parseInt(document.getElementById("crushAge").value);
+
+      const res = await fetch('/api/love', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ yourName, crushName, yourAge, crushAge })
+      });
+
+      const data = await res.json();
+      const resultBox = document.getElementById('resultBox');
+      resultBox.textContent = `💘 ${data.message}`;
+      resultBox.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
