@@ -1,6 +1,6 @@
-const express = require("express");
+const express = require("express");//import statements
 const app = express();
-const mongoose = require("mongoose");
+const mongoose = require("mongoose");//mongo db
 const loveRoutes = require("./routes/loveRoutes");
 const cors = require("cors");
 const path = require("path");
@@ -29,6 +29,11 @@ app.use("/api", loveRoutes);
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html")); // Ensure the path is correct
 });
+
+app.get('/lovestories', (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/lovestories.html"));
+});
+
 
 // Start server
 const PORT = process.env.PORT || 5000;
