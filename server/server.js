@@ -6,20 +6,21 @@ const cors = require("cors");
 const path = require("path");
 const LoveStory = require("./models/LoveStory");
 
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB connection
-mongoose
-  .connect("mongodb://127.0.0.1:27017/lovecal", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
-
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("MongoDB connected"))
+.catch((err) => console.error("MongoDB connection error:", err));
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
 // Serve static files from 'public' folder
 app.use(express.static(path.join(__dirname, "../public"))); // Adjust path if needed
 

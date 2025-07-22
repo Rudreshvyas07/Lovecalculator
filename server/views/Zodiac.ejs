@@ -19,7 +19,7 @@
       <h1 style="text-align:center;">🔮 Zodiac Fun Zone</h1>
       <form id="zodiacForm">
         <input type="text" id="yourName" name="yourName" placeholder="Your Name" required />
-        <input type="date" id="dob" name="dob" placeholder="Date of Birth" required />
+        <input type="date" id="dob" name="dob" placeholder="YYYY-MM-DD" required onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" style="font-family: 'Roboto', sans-serif;" />
         <select id="zodiacSign" name="zodiacSign" required style="width:100%;padding:16px;margin:12px 0;border-radius:16px;border:2.5px solid #ffd3dc;font-size:1.08rem;background:rgba(255,255,255,0.82);">
           <option value="">Select Zodiac Sign</option>
           <option value="Aries">Aries</option>
@@ -37,7 +37,9 @@
         </select>
         <button type="submit">See My Zodiac Fun!</button>
       </form>
-      <div id="zodiacResult" class="result-box" style="display:none;"></div>
+      <div id="zodiacResultContainer" style="display:none; margin-top: 32px;">
+        <div id="zodiacResult" class="glass-card" style="background: rgba(255,255,255,0.85); font-size: 1.25rem; text-align: center; padding: 32px 24px;"></div>
+      </div>
     </div>
   </main>
   <%- include('footer') %>
@@ -54,7 +56,7 @@
     document.getElementById('zodiacForm').style.display = 'none';
     const resultBox = document.getElementById('zodiacResult');
     resultBox.textContent = data.result || data.message;
-    resultBox.style.display = 'block';
+    document.getElementById('zodiacResultContainer').style.display = 'block';
   });
   </script>
 </body>
