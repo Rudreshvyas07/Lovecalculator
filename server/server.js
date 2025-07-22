@@ -50,8 +50,8 @@ app.get('/lovestories', async (req, res) => {
 app.get('/lovetips', (req, res) => {
   res.render('lovetips');
 });
-app.get('/zodiac', (req, res) => {
-  res.render('zodiac');
+app.get('/Zodiac', (req, res) => {
+  res.render('Zodiac');
 });
 
 
