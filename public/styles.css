@@ -179,3 +179,61 @@ button:hover {
     font-size: 2rem;
   }
 } 
+
+@media (max-width: 700px) {
+  .hamburger {
+    display: block !important;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 1100;
+    position: relative;
+  }
+  .header-nav {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    width: 92vw;
+    left: 4vw;
+    right: 4vw;
+    background: rgba(255,64,129,0.85); /* More transparent */
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 8px 32px rgba(255,51,102,0.13);
+    position: absolute;
+    top: 64px;
+    z-index: 1050;
+    padding: 10px 0 14px 0;
+  }
+  .header-nav.open {
+    display: flex !important;
+  }
+  .header-nav a {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 1.05rem !important;
+  }
+  .header-logo {
+    font-size: 1.2rem !important;
+    margin-bottom: 4px;
+    padding-top: 6px;
+  }
+  .header-inner {
+    padding: 0 2vw !important;
+    height: auto !important;
+  }
+} 
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.querySelector('.header-nav');
+  if (hamburger && nav) {
+    hamburger.addEventListener('click', function() {
+      nav.classList.toggle('open');
+    });
+  }
+});
+</script> 
