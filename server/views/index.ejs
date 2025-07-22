@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>💘 Love Calculator</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
   <style>
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
+      background: url('/images/love1.jpg') ;
+      background-size: cover; /* Adjust size as needed */
+      background-repeat:no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -97,45 +100,38 @@
   </style>
 </head>
 <body>
-  <nav>
-    <a href="#" style="color: white; margin: 0 20px; text-decoration: none; font-weight: bold;">🏠 Home</a>
-    <a href="#lovetips" style="color: white; margin: 0 20px; text-decoration: none; font-weight: bold;">💡 Love Tips</a>
-    <a href="/lovestories" style="color: white; margin: 0 20px; text-decoration: none; font-weight: bold;">📖 Love Stories</a>
-    <a href="#funzone" style="color: white; margin: 0 20px; text-decoration: none; font-weight: bold;">🎮 Fun Zone</a>
-  </nav>
-
-  <div class="card">
-    <h1>💘 Love Calculator</h1>
-    <form id="loveForm">
-      <input type="text" id="yourName" placeholder="Your name" required />
-      <input type="text" id="crushName" placeholder="Crush's name" required />
-      <input type="number" id="yourAge" placeholder="Your age" required />
-      <input type="number" id="crushAge" placeholder="Crush's age" required />
-      <button type="submit">💌 Calculate</button>
-    </form>
-    <div id="resultBox" class="result-box" style="display: none;"></div>
-  </div>
-
+  <%- include('header') %>
+  <main class="main-content" style="display: flex; align-items: center; justify-content: center; min-height: 80vh;">
+    <div class="glass-card">
+      <h1>💘 Love Calculator</h1>
+      <form id="loveForm">
+        <input type="text" id="yourName" placeholder="Your name" required />
+        <input type="text" id="crushName" placeholder="Crush's name" required />
+        <input type="number" id="yourAge" placeholder="Your age" required />
+        <input type="number" id="crushAge" placeholder="Crush's age" required />
+        <button type="submit">💌 Calculate</button>
+      </form>
+      <div id="resultBox" class="result-box" style="display: none;"></div>
+    </div>
+  </main>
   <script>
     document.getElementById('loveForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-
       const yourName = document.getElementById("yourName").value;
       const crushName = document.getElementById("crushName").value;
       const yourAge = parseInt(document.getElementById("yourAge").value);
       const crushAge = parseInt(document.getElementById("crushAge").value);
-
       const res = await fetch('/api/love', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ yourName, crushName, yourAge, crushAge })
       });
-
       const data = await res.json();
       const resultBox = document.getElementById('resultBox');
       resultBox.textContent = `💘 ${data.message}`;
       resultBox.style.display = 'block';
     });
   </script>
+  <%- include('footer') %>
 </body>
-</html>
+</html> 

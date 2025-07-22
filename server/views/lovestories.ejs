@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📖 Love Stories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: url('/images/love1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 30px;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4081;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .story {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .story h3 {
+      margin-top: 0;
+      color: #e91e63;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('header') %>
+  <main class="main-content">
+    <h1>📖 Love Stories</h1>
+    <div class="glass-card">
+      <h2 style="margin-top: 0;">Share Your Love Story</h2>
+      <form id="storyForm">
+        <textarea id="story" name="story" placeholder="Your love story..." required></textarea>
+        <button type="submit">Submit Story</button>
+      </form>
+      <div id="storyMsg" style="margin-top: 10px; color: #ff3366; font-weight: bold; display: none;"></div>
+    </div>
+    <% if (stories && stories.length > 0) { %>
+      <% stories.forEach(function(story) { %>
+        <div class="story">
+          <p><%= story.story %></p>
+          <div style="font-size: 0.9rem; color: #b71c50; margin-top: 8px; text-align: right;">
+            <%= new Date(story.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) %>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <div style="text-align: center; color: #b71c50; margin-top: 30px;">No stories yet. Be the first to share yours!</div>
+    <% } %>
+  </main>
+  <script>
+    document.getElementById('storyForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const story = document.getElementById('story').value;
+      const res = await fetch('/api/lovestories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ story })
+      });
+      const data = await res.json();
+      const msg = document.getElementById('storyMsg');
+      msg.textContent = data.message || 'Thank you for sharing your story!';
+      msg.style.display = 'block';
+      document.getElementById('storyForm').reset();
+    });
+  </script>
+  <%- include('footer') %>
+</body>
+
+</html>

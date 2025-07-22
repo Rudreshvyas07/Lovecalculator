@@ -1,0 +1,72 @@
+<header style="background: #ff4081; box-shadow: 0 2px 10px rgba(0,0,0,0.08); position: fixed; width: 100vw; left: 0; top: 0; z-index: 1000; border-radius: 0 0 24px 24px;">
+  <div class="header-inner" style="width: 100vw; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 64px; box-sizing: border-box;">
+    <div style="display: flex; align-items: center;">
+      <span class="header-logo" style="font-family: 'Pacifico', cursive; font-size: 2.4rem; color: #fff; letter-spacing: 2px; margin-right: 18px; text-shadow: 0 2px 12px #ffb6d5, 0 1px 0 #fff; font-weight: bold;">💘 LoveCal</span>
+    </div>
+    <button class="hamburger" aria-label="Menu" style="display:none;background:none;border:none;outline:none;cursor:pointer;padding:8px 10px;z-index:1100;">
+      <span style="display:block;width:28px;height:4px;background:#fff;border-radius:2px;margin:5px 0;"></span>
+      <span style="display:block;width:28px;height:4px;background:#fff;border-radius:2px;margin:5px 0;"></span>
+      <span style="display:block;width:28px;height:4px;background:#fff;border-radius:2px;margin:5px 0;"></span>
+    </button>
+    <nav class="header-nav" style="display: flex; gap: 24px;">
+      <a href="/" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.2rem; transition: color 0.2s, background 0.2s, transform 0.2s; padding: 10px 18px; border-radius: 8px;">🏠 Home</a>
+      <a href="/lovetips" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.2rem; transition: color 0.2s, background 0.2s, transform 0.2s; padding: 10px 18px; border-radius: 8px;">💡 Love Tips</a>
+      <a href="/lovestories" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.2rem; transition: color 0.2s, background 0.2s, transform 0.2s; padding: 10px 18px; border-radius: 8px;">📖 Love Stories</a>
+      <a href="/Zodiac" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 1.2rem; transition: color 0.2s, background 0.2s, transform 0.2s; padding: 10px 18px; border-radius: 8px;">🎮 Fun Zone</a>
+    </nav>
+  </div>
+  <style>
+    header nav a:hover {
+      background: rgba(255,255,255,0.22);
+      color: #fff0f5 !important;
+      transform: translateY(-2px) scale(1.07);
+    }
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto !important;
+        padding: 0 2vw !important;
+      }
+      .header-logo {
+        font-size: 1.5rem !important;
+        margin-bottom: 6px;
+      }
+      .header-nav {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        display: none;
+        background: linear-gradient(90deg, rgba(255,64,129,0.97) 60%, rgba(255,126,179,0.97) 100%);
+        border-radius: 0 0 18px 18px;
+        box-shadow: 0 8px 32px rgba(255,51,102,0.13);
+        position: absolute;
+        top: 64px;
+        left: 0;
+        z-index: 1050;
+      }
+      .header-nav.open {
+        display: flex !important;
+      }
+      .hamburger {
+        display: block !important;
+      }
+      .header-nav a {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 14px 12px;
+        font-size: 1.08rem !important;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.querySelector('.hamburger');
+      const nav = document.querySelector('.header-nav');
+      hamburger.addEventListener('click', function() {
+        nav.classList.toggle('open');
+      });
+    });
+  </script>
+</header> 

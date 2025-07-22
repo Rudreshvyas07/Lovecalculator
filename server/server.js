@@ -4,6 +4,7 @@ const mongoose = require("mongoose");//mongo db
 const loveRoutes = require("./routes/loveRoutes");
 const cors = require("cors");
 const path = require("path");
+const LoveStory = require("./models/LoveStory");
 
 // Middleware
 app.use(cors());
@@ -25,13 +26,30 @@ app.use(express.static(path.join(__dirname, "../public"))); // Adjust path if ne
 // API routes
 app.use("/api", loveRoutes);
 
-// Serve index.html on root
+// Set view engine and views directory
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Serve index.ejs on root
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html")); // Ensure the path is correct
+  res.render("index");
 });
 
-app.get('/lovestories', (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/lovestories.html"));
+app.get('/lovestories', async (req, res) => {
+  try {
+    const stories = await LoveStory.find().sort({ createdAt: -1 });
+    res.render("lovestories", { stories });
+  } catch (error) {
+    console.error("Error fetching love stories:", error);
+    res.status(500).send("Error loading stories");
+  }
+});
+
+app.get('/lovetips', (req, res) => {
+  res.render('lovetips');
+});
+app.get('/zodiac', (req, res) => {
+  res.render('zodiac');
 });
 
 
