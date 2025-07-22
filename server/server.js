@@ -5,8 +5,9 @@ const loveRoutes = require("./routes/loveRoutes");
 const cors = require("cors");
 const path = require("path");
 const LoveStory = require("./models/LoveStory");
-
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
 
 // Middleware
 app.use(cors());
@@ -20,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
 .then(() => console.log("MongoDB connected"))
 .catch((err) => console.error("MongoDB connection error:", err));
-console.log('MONGODB_URI:', process.env.MONGODB_URI);
+
 // Serve static files from 'public' folder
 app.use(express.static(path.join(__dirname, "../public"))); // Adjust path if needed
 
@@ -56,6 +57,6 @@ app.get('/zodiac', (req, res) => {
 
 // Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });

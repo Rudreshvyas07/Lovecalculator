@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  background: url('/images/love1.jpg') ;
+  background: url('/images/love1.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
@@ -178,7 +178,7 @@ button:hover {
   h1, h2 {
     font-size: 2rem;
   }
-} 
+}
 
 @media (max-width: 700px) {
   .hamburger {
@@ -188,22 +188,26 @@ button:hover {
     outline: none;
     cursor: pointer;
     z-index: 1100;
-    position: relative;
+    position: absolute;
+    right: 20px;
+    top: 18px;
   }
   .header-nav {
-    display: none;
     flex-direction: column;
     gap: 4px;
-    width: 92vw;
-    left: 4vw;
-    right: 4vw;
-    background: rgba(255,64,129,0.85); /* More transparent */
+    width: 100vw;
+    left: 0;
+    right: 0;
+    display: none;
+    background: rgba(255,64,129,0.92);
     border-radius: 0 0 18px 18px;
     box-shadow: 0 8px 32px rgba(255,51,102,0.13);
-    position: absolute;
+    position: fixed;
     top: 64px;
     z-index: 1050;
-    padding: 10px 0 14px 0;
+    padding: 8px 0 10px 0;
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
   }
   .header-nav.open {
     display: flex !important;
@@ -212,8 +216,8 @@ button:hover {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 10px 12px;
-    font-size: 1.05rem !important;
+    padding: 8px 12px;
+    font-size: 0.95rem !important;
   }
   .header-logo {
     font-size: 1.2rem !important;
@@ -224,16 +228,4 @@ button:hover {
     padding: 0 2vw !important;
     height: auto !important;
   }
-} 
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const hamburger = document.querySelector('.hamburger');
-  const nav = document.querySelector('.header-nav');
-  if (hamburger && nav) {
-    hamburger.addEventListener('click', function() {
-      nav.classList.toggle('open');
-    });
-  }
-});
-</script> 
+}
